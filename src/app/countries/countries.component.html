@@ -1,0 +1,47 @@
+<div class="container w-50 m-auto h-80">
+    <div class="mt-5"></div>
+    <div class="row pb-4" style="border: 1px solid #aaa;">
+        <div class="row">
+            <p class="bg-white p-3" style="margin: -30px 0 0 5px; width: 80px;">Filtros</p>
+        </div>
+
+        <div class="col-6">
+            <strong>Pais</strong>
+            <input class="form-control mt-2" type="search" name="country" id="" placeholder="Encuentra el país"
+                [(ngModel)]="country" (ngModelChange)="SearchByCountry()">
+
+        </div>
+        <div class="col-6">
+            <strong>Continente</strong>
+
+            <ng-select 
+            [items]="continents"
+            [searchFn]="SearchByContinent"
+            bindLabel="continent"
+            placeholder="Selecciona continente"
+            [(ngModel)]="continents">
+          </ng-select>
+
+        </div>
+
+    </div>
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th> Paises </th>
+                <th> Continentes </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let country of countries | paginate:{itemsPerPage: 3, currentPage: p}">
+                <td>{{ country.country }}</td>
+                <td>{{ country.continent }} </td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)=" p = $event "></pagination-controls>
+
+
+    </table>
+
+</div>
